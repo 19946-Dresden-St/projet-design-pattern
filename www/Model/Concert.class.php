@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use App\Core\Sql;
+use App\Model\User;
 
 class Concert extends Sql
 {
@@ -11,6 +12,8 @@ class Concert extends Sql
     protected $venue;
     protected $city;
     protected $link;
+    
+    private $subscribedUsers;
     
     public function __construct()
     {
@@ -159,6 +162,27 @@ class Concert extends Sql
                 ]
             ]
         ];
+    }
+
+
+
+
+    /////DESIGN PATTERN OBSERVER
+    public function subscribe(User $user)
+    {
+        $this->subscribedUsers[ $user->getId() ] = $user;
+    }
+
+    public function unsubscribe(User $user)
+    {
+        unset( $this->subscribedUsers[ $user->getId() ] ); 
+    }
+
+    public function notify()
+    {
+        foreach ($this->subscribedUsers as $user) {
+            $user->update($this);
+        }
     }
 }
 

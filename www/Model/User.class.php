@@ -3,6 +3,7 @@ namespace App\Model;
 
 use App\Core\Sql;
 use App\Model\Mymail as mymailModel;
+use App\Model\Concert;
 
 class User extends Sql
 {
@@ -348,6 +349,22 @@ class User extends Sql
         ];
 
         return $this->select($where);
+    }
+
+
+
+    //DESIGN PATTERN OBSERVER
+    public function update(Concert $concert) 
+    {
+        $mail = new mymailModel();
+        $body = "New Concert : ".$concert->getTitle();
+        // echo $body;die;
+        $subject = "New Concert";
+        $addr = [$this->email];
+        $mail->setupMyMail($subject, $body, $addr);
+        $res = $mail->sendMyMail();
+
+        return $res;
     }
 
 }

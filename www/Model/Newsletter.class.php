@@ -18,6 +18,17 @@ class Newsletter extends Sql
         parent::__construct();
     }
 
+
+    /////DESIGN PATTERN PROTOTYPE
+    public function __clone()
+    {
+        $this->title = "Copy of ".$this->title();
+        $this->content = $this->content;
+        $this->date = $this->date;
+        $this->active = $this->active;
+        $this->type = $this->type;
+    }
+
     public function setFromArray($data)
     {
         if (isset($data['id'])) {
@@ -302,6 +313,8 @@ class Newsletter extends Sql
             ]
         ];
     }
+
+    
 }
 
 ?>

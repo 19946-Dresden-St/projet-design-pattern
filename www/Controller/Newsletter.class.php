@@ -225,4 +225,35 @@ class Newsletter {
         }
     }
 
+
+    ////design pattern prototype
+    public function cloneNews($data=array())
+    {
+        $newsletter = new newsletterModel();
+
+        if (count($data)>0 && isset($data['id'])) {
+
+            $id = htmlspecialchars($data['id']);
+
+            $newsletter = $newsletter->getById($id);
+
+            if ($newsletter!==false) {
+                $clonenews = clone $newsletter;
+                $res = $clonenews->save();
+
+                if ($res!==false) {
+                    header("Location: /administration/newsletter/edit/".$res);
+                    exit();
+                }
+
+                header("Location: /administration/newsletter?succes=nok");
+                exit();
+            }
+
+            header("Location: /administration/newsletter?succes=nok");
+            exit();
+            
+        }
+    }
+
 }
