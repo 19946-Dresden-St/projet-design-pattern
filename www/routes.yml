@@ -1,0 +1,293 @@
+# ROUTING INSTALL
+/install/step2:
+  controller: installer
+  action: step2
+
+/install/step3:
+  controller: installer
+  action: step3
+
+# ROUTING FRONT
+/:
+  controller: main
+  action: home
+
+# /contact:
+#   controller: main
+#   action: contact
+
+# ROUTING CONNECTON/INSCRIPTION/MDP OUBLIÉ 
+
+/login:
+  controller: user
+  action: login
+
+/logout:
+  controller: user
+  action: logout
+
+/register:
+  controller: user
+  action: register
+
+/forgottenpwd:
+  controller: user
+  action: forgottenpwd
+
+/resetpwd/{id}/{token}:
+  controller: user
+  action: resetpwd
+  param:
+    - id
+    - token
+
+/confirmuser/{id}/{token}:
+  controller: user
+  action: confirmuser
+  param:
+    - id
+    - token
+
+### ROUTING BACK
+
+/administration:
+  controller: dashboard
+  action: dashboard
+  security:
+    - admin
+    - modo
+
+/administration/templates:
+  controller: admin
+  action: templates
+
+/mail:
+  controller: myMail
+  action: testMail
+
+/testsam:
+  controller: testSam
+  action: test
+
+# ROUTING POSTS
+
+/administration/posts:
+  controller: post
+  action: list
+  security:
+    - admin
+
+/administration/post/add:
+  controller: post
+  action: add
+  security:
+    - admin
+
+/administration/post/edit/{id}:
+  controller: post
+  action: edit
+  param:
+    - id
+  security:
+    - admin
+
+/administration/post/delete/{id}:
+  controller: post
+  action: delete
+  param:
+    - id
+  security:
+    - admin
+
+# ROUTING USERS
+
+/administration/users:
+  controller: user
+  action: list
+  security:
+    - admin
+
+/administration/user/role/{id}:
+  controller: user
+  action: role
+  param:
+    - id
+  security:
+    - admin
+
+# ROUTING NEWSLETTER
+
+/administration/newsletter:
+  controller: newsletter
+  action: list
+  security:
+    - admin
+
+/administration/newsletter/add:
+  controller: newsletter
+  action: add
+  security:
+    - admin
+
+/administration/newsletter/edit/{idnews}:
+  controller: newsletter
+  action: edit
+  param:
+    - idnews
+  security:
+    - admin
+
+/administration/newsletter/subscribeuser/{iduser}/{idnews}:
+  controller: newsletter
+  action: subscribe
+  param:
+    - iduser
+    - idnews
+  security:
+    - admin
+
+/administration/newsletter/unsubscribeuser/{iduser}/{idnews}:
+  controller: newsletter
+  action: unsubscribe
+  param:
+    - iduser
+    - idnews
+  security:
+    - admin
+
+/administration/newsletter/send/{idnews}:
+  controller: newsletter
+  action: send
+  param:
+   - idnews
+  security:
+    - admin
+
+/administration/newsletter/delete/{id}:
+  controller: newsletter
+  action: delete
+  param:
+   - id
+  security:
+    - admin
+
+# ROUTING PROJECT
+
+/project/{id}:
+  controller: project
+  action: seeproject
+  param:
+    - id
+
+/administration/projects:
+  controller: project
+  action: list
+  security:
+    - admin
+
+/administration/project/add:
+  controller: project
+  action: add
+  security:
+    - admin
+
+/administration/project/edit/{id}:
+  controller: project
+  action: edit
+  param:
+    - id
+  security:
+    - admin
+
+/administration/project/delete/{id}:
+  controller: project
+  action: delete
+  param: 
+    - id
+  security:
+    - admin
+
+/administration/media:
+  controller: project
+  action: list
+  security:
+    - admin
+
+# ROUTING DES PAGES
+/administration/page:
+  controller: page
+  action: list
+  security:
+    - admin
+
+/administration/page/add:
+  controller: page
+  action: add
+  security:
+    - admin
+
+/administration/page/edit/{id}:
+  controller: page
+  action: edit
+  param: 
+    - id
+  security:
+    - admin
+
+/administration/page/delete/{id}:
+  controller: page
+  action: delete
+  param:
+    - id
+  security:
+    - admin
+  
+# ROUTING AFFICHAGE PAGE FRONT
+/page/{route}:
+  controller: page
+  action: displaypage
+  param:
+    - route
+
+# ROUTING COMMENTS
+/administration/commentmod:
+  controller: comment
+  action: listUnmod
+  security:
+    - modo
+    - admin
+
+/administration/comment/accept/{id}:
+  controller: comment
+  action: accept
+  param:
+    - id
+  security: 
+    - modo
+    - admin
+
+/administration/comment/decline/{id}:
+  controller: comment
+  action: decline
+  param:
+    - id
+  security: 
+    - modo
+    - admin
+
+/administration/comment/add/{type}/{id_obj}:
+  controller: comment
+  action: add
+  param:
+    - type
+    - id_obj
+    - user
+
+# ROUTING CONCERT
+/administration/concerts:
+  controller: concert
+  action: list
+
+/administration/concerts/add:
+  controller: concert
+  action: add
